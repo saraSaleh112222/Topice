@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topice</title>
+    <!-- file css -->
+    <link rel="stylesheet" href="css//style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+    <header>
+        <div class="container top-nav">
+            <a href="#" class="logo"><img src="img/logo-black.png"></a>
+            <form action="" class="search">
+                <input type="search" placeholder="search for product...">
+                <button type="submit">search</button>
+            </form>
+
+        </div>
+        <nav>
+            <div class="links container">
+                <i onclick="open_menu()" class="fa-solid fa-bars btn_open_menu"></i>
+                <ul id="menu">
+                    <span onclick="close_menu()" class="bg_overly"></span>
+                    <i onclick="close_menu()" class="fa-regular fa-circle-xmark btn_close_menu"></i>
+                    <img src="img/logo-black.png" class="logo_menu" alt="">
+                    <li class="active"><a href="index.html">home</a></li>
+                    <li><a href="all_products.html">all product</a></li>
+                    <li><a href="">about us</a></li>
+                    <li><a href="">contact</a></li>
+                </ul>
+                <div class="loging_signup">
+                    <a href="#">login<i class="fa-solid fa-right-to-bracket"></i></a>
+                    <a href="#">signup<i class="fa-solid fa-user-plus"></i></a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="check_out_items">
+
+    </div>
+    <div class="total" style="text-align: center;">
+        <p>Cart subtotal</p>
+        <p class="price_cart_total">$0</p>
+    </div>
+    
+    <div class="button_cart">
+        <button onclick="onClickForm()" class="btn_cart trans_bg">proceed to checkout</button>
+    </div>
+    <div class="back_to_top">
+        <p>back to top </p>
+    </div>
+
+    <footer>
+        <div class="container">
+
+            <div class="big_row">
+                <img src="img/logo-white.png" alt="">
+                <div class="hotLine">
+                    <i class="fa-solid fa-headset"></i>
+                    <div class="text">
+                        <h5>hotLine free 24/24</h5>
+                        <h6>(+963) 099 876 5432</h6>
+                    </div>
+                </div>
+                <p>we are here for service you to improve your life</p>
+            </div>
+
+            <div class="row">
+
+                <h4>FAQ & HELP</h4>
+
+                <div class="links">
+                    <a href="#">F.A.Q.6</a>
+                    <a href="#">Ordering Tracking</a>
+                    <a href="">Contacts</a>
+                    <a href="#">Events</a>
+                    <a href="#">Help Center</a>
+                </div>
+
+            </div>
+
+
+            <div class="row">
+
+                <h4>Shipping & Delivery</h4>
+
+                <div class="links">
+                    <a href="#">Delivery Information</a>
+                    <a href="#">Discount</a>
+                    <a href="#">Payment</a>
+                    <a href="#">Estimated Delivery Time</a>
+                    <a href="#">Shipping Guide</a>
+                </div>
+
+            </div>
+
+
+            <div class="row">
+
+                <h4>Information</h4>
+
+                <div class="links">
+                    <a href="#">Popular</a>
+                    <a href="#">Our Service</a>
+                    <a href="#">your Account</a>
+                    <a href="#">Privecy Ana policy</a>
+                    <a href="#">Term & Conditions</a>
+                </div>
+
+            </div>
+
+        </div>
+    </footer>
+    <!-- main script -->
+    <!-- <script src="js/main.js"></script> -->
+    <!-- all_product script -->
+    <script src="js/all_products.js"></script>
+    <script>
+function onClickForm(){
+    window.location.replace(`/form.html`);
+}        
+        var cart = document.querySelector('.cart');
+
+        const items = JSON.parse(localStorage.getItem('cart_products'));
+
+        var items_in_cart = document.querySelector(".check_out_items");
+
+        let count_item = document.querySelector(".count_item");
+        let price_cart_total = document.querySelector(".price_cart_total");
+
+        console.log(items)
+        function getCartItems() {
+            let total_price = 0;
+            let items_c = ""
+            for (let i = 0; i < items.length; i++) {
+                items_c += `
+        
+        <div class="check_out_item">
+                <img src="${items[i].img}" alt="">
+                <div class="content">
+                    <h4>${items[i].name}"</h4>
+                    <p class="price_cart">${items[i].price}"</p>
+                </div>
+                <button onclick="remove_from_cart(${i})" class="delete_item"><i class="fa-solid fa-trash-can"></i></button>
+            </div>
+        
+        `
+
+                total_price += items[i].price
+                console.log(total_price)
+
+            }
+            price_cart_total.innerHTML = "$" + total_price
+
+            items_in_cart.innerHTML = items_c
+
+
+            count_item.innerHTML = items.length
+        }
+
+        getCartItems()
+    </script>
+</body>
+
+</html>
